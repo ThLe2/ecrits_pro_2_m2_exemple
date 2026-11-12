@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Un mail, sept hésitations</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">Écrits professionnels 2/6 <span>/</span> Module 2</div><h1>Un mail, sept hésitations</h1><p class="sous">Exemple commenté — Futur ou conditionnel ?</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>Le mail tel qu'il a été écrit</h2>
+<div class="carte">
+<p>Une conseillère répond à un client qui renvoie un article commandé en ligne. Le fond est juste : un achat à distance peut être annulé sans motif pendant quatorze jours après la réception, et le vendeur doit alors rembourser. Mais <b>SEPT VERBES</b> sont au mauvais temps ou mal conjugués, et le mail ne dit plus ce que la conseillère voulait dire. Lisez-le, cherchez-les, puis affichez la correction.</p>
+<div class="mail">
+ <div class="ent"><b>Objet :</b> Votre retour et votre remboursement</div>
+ <div class="txt"><p>Bonjour Monsieur Garnier,</p><p>Vous m'avez signalé ce matin que vous renonciez à votre commande du 3 novembre, d'un montant de 89,90 €. Nous avons bien reçu l'article, que vous nous avez retourné moins de quatorze jours après sa réception : vous exercez donc votre droit de rétractation, sans avoir à vous justifier.</p><p>Nous vous <span class="err">rembourserions</span> <span class="cor">rembourserons</span><span class="nf">1</span> cette somme sans condition. Le montant <span class="err">serait</span> <span class="cor">sera</span><span class="nf">2</span> recrédité sur la carte bancaire utilisée pour votre achat dans les quatorze jours qui suivent votre demande.</p><p><span class="err">Je voudrai</span> <span class="cor">Je voudrais</span><span class="nf">3</span> toutefois attirer votre attention sur un point : les frais de retour restent à votre charge, comme l'indiquent nos conditions générales de vente.</p><p><span class="err">Si vous souhaiteriez</span> <span class="cor">Si vous souhaitez</span><span class="nf">4</span> commander un autre modèle, il vous suffit de passer par votre espace client ; vous pouvez aussi me demander de vous le réserver : vous <span class="err">receverez</span> <span class="cor">recevrez</span><span class="nf">5</span> alors un mail de confirmation. Je vous serais reconnaissante de me confirmer votre choix par retour de mail.</p><p><span class="err">Je vous envoierai</span> <span class="cor">Je vous enverrai</span><span class="nf">6</span> dès demain la confirmation écrite du remboursement, et <span class="err">je vous rappelerai</span> <span class="cor">je vous rappellerai</span><span class="nf">7</span> jeudi pour faire le point.</p><p>Je vous prie d'agréer, Monsieur, mes salutations distinguées.</p><p>Sophie Martel — Conseillère clientèle</p></div>
+</div>
+<button class="btn" id="voir" onclick="document.body.classList.add('vu');this.style.display='none'">Afficher la correction</button>
+</div>
+
+<div class="liste">
+<h2><span class="num">2 ·</span>Les corrections, une par une</h2>
+<div class="carte">
+<table><thead><tr><th>N°</th><th>Point</th><th>Le raisonnement</th></tr></thead><tbody><tr><td><b>1</b></td><td>futur / conditionnel</td><td>Le remboursement d'une rétractation exercée dans le délai est <b>de droit</b>. C'est un engagement ferme : futur, « rembourserons ». Le conditionnel laissait croire que l'entreprise pouvait refuser.</td></tr><tr><td><b>2</b></td><td>futur / conditionnel</td><td>Même raisonnement : le remboursement est certain, « sera ». « Serait » sous-entend une condition qui n'existe pas.</td></tr><tr><td><b>3</b></td><td>conditionnel de politesse</td><td>Un souhait exprimé poliment se met au conditionnel : « je voudrais ». Test : « nous voudrions », et non « nous voudrons ».</td></tr><tr><td><b>4</b></td><td>après « si »</td><td>Après le « si » qui pose une condition, <b>jamais</b> de conditionnel. La suite de la phrase est au présent (« il vous suffit ») : on écrit donc « si vous souhaitez ».</td></tr><tr><td><b>5</b></td><td>conjugaison</td><td>Recevoir a un futur irrégulier : « je recevrai », « vous recevrez ». « Receverez » n'existe pas.</td></tr><tr><td><b>6</b></td><td>conjugaison</td><td>Le verbe envoyer a un futur irrégulier : « j'enverrai », « nous enverrons ». « Envoierai » n'existe pas.</td></tr><tr><td><b>7</b></td><td>conjugaison</td><td>Rappeler double le l devant un e muet : « je rappelle », donc « je rappellerai ».</td></tr></tbody></table>
+</div>
+
+<h2><span class="num">3 ·</span>Ce qu'il faut en retenir</h2>
+<div class="carte"><div class="enc"><span class="t">CE QUE CE MAIL MONTRE</span>Une ou deux lettres — « rembourserions » au lieu de « rembourserons », « serait » au lieu de « sera » — transforment un droit du client en faveur incertaine. Le temps du verbe dit si l'entreprise s'engage ou non.</div><div class="enc al"><span class="t">CE QUE LE CLIENT RETIENT</span>Avec la version fautive, M. Garnier comprend que son remboursement n'est pas garanti. Il rappelle, inquiet, ou il réclame : le mail a créé le problème qu'il devait régler.</div><div class="enc ci"><span class="t">LA RÈGLE DE PRUDENCE</span>Futur pour ce qui est certain et dépend de vous ou de la loi (un droit, un envoi, un rappel). Conditionnel pour la politesse et pour ce qui n'est pas acquis — un geste commercial ou une date de réapprovisionnement, par exemple, ne se promettent jamais au futur.</div></div>
+</div>
+
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
